@@ -1,0 +1,15 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFramework>netstandard2.0</TargetFramework>
+		<LangVersion>latest</LangVersion>
+		<Version>0.0.1</Version>
+		<Authors>mohyusufz</Authors>
+		<Description>ESC/POS Command Epson</Description>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<PackageReference Include="System.Drawing.Common" Version="9.0.1" />
+	</ItemGroup>
+
+</Project>
