@@ -17,7 +17,7 @@ public class Printer(string printerName, string codepage = "IBM860") : IPrinter
 
     public void PrintDocument()
     {
-
+        RawPrinterHelper.SendBytesToPrinter(_printerName, _buffer);
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
