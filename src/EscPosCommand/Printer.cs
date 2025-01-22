@@ -39,6 +39,11 @@ public class Printer(string printerName, string codepage = "IBM860") : IPrinter
         _buffer = [.. list];
     }
 
+    private void Append(byte[] value)
+    {
+        _buffer = _buffer.AddBytes(value);
+    }
+
     public void AppendLine(string value)
     {
         AppendString(value, true);
@@ -67,127 +72,127 @@ public class Printer(string printerName, string codepage = "IBM860") : IPrinter
 
     public void Separator(int charLength, char separatorChar = '-')
     {
-        _buffer.AddBytes(_command.Separator(charLength, separatorChar));
+        Append(_command.Separator(charLength, separatorChar));
     }
 
     public void AutoTest()
     {
-        _buffer.AddBytes(_command.AutoTest());
+        Append(_command.AutoTest());
     }
 
     public void Font(string value, Fonts state)
     {
-        _buffer.AddBytes(_command.FontMode.Font(value, state));
+        Append(_command.FontMode.Font(value, state));
     }
 
     public void BoldMode(string value)
     {
-        _buffer.AddBytes(_command.FontMode.Bold(value));
+        Append(_command.FontMode.Bold(value));
     }
 
     public void BoldMode(PrinterModeState state)
     {
-        _buffer.AddBytes(_command.FontMode.Bold(state));
+        Append(_command.FontMode.Bold(state));
     }
 
     public void UnderlineMode(string value)
     {
-        _buffer.AddBytes(_command.FontMode.Underline(value));
+        Append(_command.FontMode.Underline(value));
     }
 
     public void UnderlineMode(PrinterModeState state)
     {
-        _buffer.AddBytes(_command.FontMode.Underline(state));
+        Append(_command.FontMode.Underline(state));
     }
 
     public void ExpandedMode(string value)
     {
-        _buffer.AddBytes(_command.FontMode.Expanded(value));
+        Append(_command.FontMode.Expanded(value));
     }
 
     public void ExpandedMode(PrinterModeState state)
     {
-        _buffer.AddBytes(_command.FontMode.Expanded(state));
+        Append(_command.FontMode.Expanded(state));
     }
 
     public void CondensedMode(string value)
     {
-        _buffer.AddBytes(_command.FontMode.Condensed(value));
+        Append(_command.FontMode.Condensed(value));
     }
 
     public void CondensedMode(PrinterModeState state)
     {
-        _buffer.AddBytes(_command.FontMode.Condensed(state));
+        Append(_command.FontMode.Condensed(state));
     }
 
     public void NormalWidth()
     {
-        _buffer.AddBytes(_command.FontWidth.Normal());
+        Append(_command.FontWidth.Normal());
     }
 
     public void DoubleWidth2()
     {
-        _buffer.AddBytes(_command.FontWidth.DoubleWidth2());
+        Append(_command.FontWidth.DoubleWidth2());
     }
 
     public void DoubleWidth3()
     {
-        _buffer.AddBytes(_command.FontWidth.DoubleWidth3());
+        Append(_command.FontWidth.DoubleWidth3());
     }
 
     public void AlignLeft()
     {
-        _buffer.AddBytes(_command.Alignment.Left());
+        Append(_command.Alignment.Left());
     }
 
     public void AlignRight()
     {
-        _buffer.AddBytes(_command.Alignment.Right());
+        Append(_command.Alignment.Right());
     }
 
     public void AlignCenter()
     {
-        _buffer.AddBytes(_command.Alignment.Center());
+        Append(_command.Alignment.Center());
     }
 
     public void FullPaperCut()
     {
-        _buffer.AddBytes(_command.PaperCut.Full());
+        Append(_command.PaperCut.Full());
     }
 
     public void PartialPaperCut()
     {
-        _buffer.AddBytes(_command.PaperCut.Partial());
+        Append(_command.PaperCut.Partial());
     }
 
     public void OpenDrawer()
     {
-        _buffer.AddBytes(_command.Drawer.Open());
+        Append(_command.Drawer.Open());
     }
 
     public void QrCode(string qrData)
     {
-        _buffer.AddBytes(_command.QrCode.Print(qrData));
+        Append(_command.QrCode.Print(qrData));
     }
 
     public void QrCode(string qrData, QrCodeSize qrCodeSize)
     {
-        _buffer.AddBytes(_command.QrCode.Print(qrData, qrCodeSize));
+        Append(_command.QrCode.Print(qrData, qrCodeSize));
     }
 
     public void Code128(string code, Positions printString = Positions.NotPrint)
     {
-        _buffer.AddBytes(_command.BarCode.Code128(code, printString));
+        Append(_command.BarCode.Code128(code, printString));
     }
 
     public void Code39(string code, Positions printString = Positions.NotPrint)
     {
-        _buffer.AddBytes(_command.BarCode.Code39(code, printString));
+        Append(_command.BarCode.Code39(code, printString));
     }
 
     public void Ean13(string code, Positions printString = Positions.NotPrint)
     {
-        _buffer.AddBytes(_command.BarCode.Ean13(code, printString));
+        Append(_command.BarCode.Ean13(code, printString));
     }
 
     public void InitializePrint()
@@ -197,21 +202,21 @@ public class Printer(string printerName, string codepage = "IBM860") : IPrinter
 
     public void Image(Bitmap image)
     {
-        _buffer.AddBytes(_command.Image.Print(image));
+        Append(_command.Image.Print(image));
     }
 
     public void Image(Bitmap image, bool isScale)
     {
-        _buffer.AddBytes(_command.Image.Print(image, isScale));
+        Append(_command.Image.Print(image, isScale));
     }
 
     public void NormalLineHeight()
     {
-        _buffer.AddBytes(_command.LineHeight.Normal());
+        Append(_command.LineHeight.Normal());
     }
 
     public void SetLineHeight(byte height)
     {
-        _buffer.AddBytes(_command.LineHeight.SetLineHeight(height));
+        Append(_command.LineHeight.SetLineHeight(height));
     }
 }
