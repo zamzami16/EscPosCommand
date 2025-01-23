@@ -3,10 +3,14 @@
 	<PropertyGroup>
 		<TargetFramework>netstandard2.0</TargetFramework>
 		<LangVersion>latest</LangVersion>
-		<Version>0.0.4</Version>
+		<Version>0.0.5</Version>
 		<Authors>mohyusufz</Authors>
 		<Description>ESC/POS Command Epson</Description>
 		<RepositoryUrl>https://github.com/zamzami16/EscPosCommand</RepositoryUrl>
+		<PackageTags>escpos;epson;printer</PackageTags>
+		<PackageProjectUrl>https://github.com/zamzami16/EscPosCommand</PackageProjectUrl>
+		<PackageLicenseExpression>MIT</PackageLicenseExpression>
+		<RepositoryType>git</RepositoryType>
 	</PropertyGroup>
 
 	<ItemGroup>

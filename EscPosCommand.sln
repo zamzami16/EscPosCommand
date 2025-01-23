@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EscPosCommand", "src\EscPos
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EscPosCommandDemo", "src\EscPosCommandDemo\EscPosCommandDemo.csproj", "{BEEDA78C-90EC-4A54-B03C-5423F17314A3}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{ECE326BA-C88F-41A1-AF00-7D3B2E8C5C93}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -24,5 +26,9 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{E22F79A6-CE6C-4020-B972-6E06761E9AB5} = {ECE326BA-C88F-41A1-AF00-7D3B2E8C5C93}
+		{BEEDA78C-90EC-4A54-B03C-5423F17314A3} = {ECE326BA-C88F-41A1-AF00-7D3B2E8C5C93}
 	EndGlobalSection
 EndGlobal

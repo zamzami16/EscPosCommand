@@ -22,13 +22,13 @@ internal static class PrinterExtensions
 
     public static byte[] AddBytes(this byte[] bytes, byte[] addBytes)
     {
-        if (addBytes == null)
+        if (addBytes == null || addBytes.Length == 0)
             return bytes;
 
-        var list = new List<byte>();
-        list.AddRange(bytes);
-        list.AddRange(addBytes);
-        return [.. list];
+        var result = new byte[bytes.Length + addBytes.Length];
+        Buffer.BlockCopy(bytes, 0, result, 0, bytes.Length);
+        Buffer.BlockCopy(addBytes, 0, result, bytes.Length, addBytes.Length);
+        return result;
     }
 
     public static byte[] AddBytes(this byte[] bytes, string value)
@@ -36,10 +36,7 @@ internal static class PrinterExtensions
         if (string.IsNullOrEmpty(value))
             return bytes;
 
-        var list = new List<byte>();
-        list.AddRange(bytes);
-        list.AddRange(Encoding.GetEncoding(850).GetBytes(value));
-        return [.. list];
+        return bytes.AddBytes(Encoding.GetEncoding(850).GetBytes(value));
     }
 
     public static byte[] ToBytes(this string value)

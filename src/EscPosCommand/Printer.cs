@@ -29,14 +29,15 @@ public class Printer(string printerName, string codepage = "IBM860") : IPrinter
         if (useLf)
             value += "\n";
 
-        var list = new List<byte>();
-        if (_buffer != null)
-            list.AddRange(_buffer);
-
         var bytes = Encoding.GetEncoding(_codepage).GetBytes(value);
-        list.AddRange(bytes);
-
-        _buffer = [.. list];
+        if (_buffer != null && _buffer.Length > 0)
+        {
+            _buffer = _buffer.AddBytes(bytes);
+        }
+        else
+        {
+            _buffer = bytes;
+        }
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
