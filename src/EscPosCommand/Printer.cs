@@ -39,6 +39,7 @@ public class Printer(string printerName, string codepage = "IBM860") : IPrinter
         _buffer = [.. list];
     }
 
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     private void Append(byte[] value)
     {
         _buffer = _buffer.AddBytes(value);
@@ -77,12 +78,73 @@ public class Printer(string printerName, string codepage = "IBM860") : IPrinter
 
     public void AutoTest()
     {
-        Append(_command.AutoTest());
+        Clear();
+
+        var lorem = " Lorem ipsum dolor";
+
+        AppendInitializePrint();
+        AppendLine("NORMAL - 48 COLUMNS");
+        AppendLine("1...5...10...15...20...25...30...35...40...45.48");
+        Separator(48);
+        AppendLine("Text Normal");
+        BoldMode("Bold Text");
+        UnderlineMode("Underlined text");
+        Separator(48);
+        ExpandedMode(PrinterModeState.On);
+        AppendLine("Expanded - 23 COLUMNS");
+        AppendLine("1...5...10...15...20..23");
+        ExpandedMode(PrinterModeState.Off);
+        Separator(48);
+        CondensedMode(PrinterModeState.On);
+        AppendLine("Condensed - 64 COLUMNS");
+        AppendLine("1...5...10...15...20...25...30...35...40...45...50...55...60..64");
+        CondensedMode(PrinterModeState.Off);
+        Separator(48);
+        DoubleWidth2();
+        AppendLine("Font Width 2");
+        DoubleWidth3();
+        AppendLine("Font Width 3");
+        NormalWidth();
+        AppendLine("Normal width");
+        Separator(48);
+        AlignRight();
+        AppendLine("Right aligned text");
+        AlignCenter();
+        AppendLine("Center-aligned text");
+        AlignLeft();
+        AppendLine("Left aligned text");
+        Separator(48);
+        Font("Font A" + lorem, Fonts.FontA);
+        Font("Font B" + lorem, Fonts.FontB);
+        Font("Font C" + lorem, Fonts.FontC);
+        Font("Font D" + lorem, Fonts.FontD);
+        Font("Font E" + lorem, Fonts.FontE);
+        Font("Font Special A" + lorem, Fonts.SpecialFontA);
+        Font("Font Special B" + lorem, Fonts.SpecialFontB);
+        Separator(48);
+        AppendInitializePrint();
+        SetLineHeight(24);
+        AppendLine("This is first line with line height of 24 dots");
+        SetLineHeight(30);
+        AppendLine("This is second line with line height of 30 dots");
+        SetLineHeight(40);
+        AppendLine("This is third line with line height of 40 dots");
+        DoubleWidth2();
+        BoldMode("Font Width 2 With Bold");
+        NormalWidth();
+        NewLines(3);
+        AppendLine("End of Test :)");
+        Separator(48);
     }
 
     public void Font(string value, Fonts state)
     {
         Append(_command.FontMode.Font(value, state));
+    }
+
+    public void Font(Fonts state)
+    {
+        Append(_command.FontMode.Font(state));
     }
 
     public void BoldMode(string value)
@@ -218,5 +280,10 @@ public class Printer(string printerName, string codepage = "IBM860") : IPrinter
     public void SetLineHeight(byte height)
     {
         Append(_command.LineHeight.SetLineHeight(height));
+    }
+
+    public void AppendInitializePrint()
+    {
+        Append(_command.InitializePrint.Initialize());
     }
 }

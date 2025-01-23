@@ -13,6 +13,7 @@ public interface IPrinter
     void Separator(int charLength, char separatorChar = '-');
     void AutoTest();
     void Font(string value, Fonts state);
+    void Font(Fonts state);
     void BoldMode(string value);
     void BoldMode(PrinterModeState state);
     void UnderlineMode(string value);
@@ -40,4 +41,5 @@ public interface IPrinter
     void Code39(string code, Positions positions);
     void Ean13(string code, Positions positions);
     void InitializePrint();
+    void AppendInitializePrint();
 }

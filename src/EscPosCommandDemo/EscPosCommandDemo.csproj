@@ -79,5 +79,11 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\EscPosCommand\EscPosCommand.csproj">
+      <Project>{e22f79a6-ce6c-4020-b972-6e06761e9ab5}</Project>
+      <Name>EscPosCommand</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
