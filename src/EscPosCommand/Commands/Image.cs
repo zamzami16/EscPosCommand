@@ -12,7 +12,7 @@ public class Image : IImage
         var threshold = 127;
         var index = 0;
 
-        double scale = 0;
+        double scale = 1;
 
         if (isScale)
         {
@@ -131,4 +131,3 @@ public class BitmapData
     public int Height { get; set; }
     public int Width { get; set; }
 }
-
