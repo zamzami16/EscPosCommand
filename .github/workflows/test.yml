@@ -21,6 +21,9 @@ jobs:
       with:
         dotnet-version: '8.0.x'
 
+    - name: Install libgdiplus
+      run: sudo apt-get install -y libgdiplus
+
     - name: Install dependencies
       run: dotnet restore test/EscPosCommandTests/EscPosCommandTests.csproj
 
