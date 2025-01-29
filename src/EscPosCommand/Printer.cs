@@ -3,6 +3,7 @@ using EscPosCommand.Enums;
 using EscPosCommand.Extensions;
 using EscPosCommand.Helper;
 using EscPosCommand.Interfaces;
+using System.Diagnostics.CodeAnalysis;
 using System.Runtime.CompilerServices;
 using System.Text;
 
@@ -15,9 +16,15 @@ public class Printer(string printerName, string codepage = "IBM860") : IPrinter
     private readonly IPrintCommand _command = new EscPos();
     private readonly string _codepage = codepage;
 
+    [ExcludeFromCodeCoverage]
     public void PrintDocument()
     {
         RawPrinterHelper.SendBytesToPrinter(_printerName, _buffer);
+    }
+
+    internal byte[] GetBuffer()
+    {
+        return _buffer;
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -63,7 +70,7 @@ public class Printer(string printerName, string codepage = "IBM860") : IPrinter
 
     public void NewLines(int lines)
     {
-        for (int i = 1, loopTo = lines - 1; i <= loopTo; i++)
+        for (int i = 1, loopTo = lines; i <= loopTo; i++)
             NewLine();
     }
 

@@ -1,0 +1,31 @@
+name: .NET
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v3
+      with:
+        dotnet-version: '8.0.x'
+
+    - name: Install dependencies
+      run: dotnet restore test/EscPosCommandTests/EscPosCommandTests.csproj
+
+    - name: Build
+      run: dotnet build test/EscPosCommandTests/EscPosCommandTests.csproj --configuration Release --no-restore
+
+    - name: Run tests
+      run: dotnet test test/EscPosCommandTests/EscPosCommandTests.csproj --no-restore --verbosity normal
