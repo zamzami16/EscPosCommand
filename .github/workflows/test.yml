@@ -54,7 +54,6 @@ jobs:
       run: dotnet pack src/EscPosCommand/EscPosCommand.csproj --configuration Release --no-restore --output ./nupkg
       
     - name: Push to NuGet
-      if: steps.compare_versions.outputs.version_changed == 'true'
       env:
         NUGET_API_KEY: ${{ secrets.NUGET_API_KEY }}
       run: dotnet nuget push ./nupkg/*.nupkg --api-key $NUGET_API_KEY --source https://api.nuget.org/v3/index.json --skip-duplicate
