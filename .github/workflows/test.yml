@@ -10,27 +10,22 @@ on:
 
 jobs:
   build:
-    runs-on: windows-latest
+    runs-on: ubuntu-latest
 
     steps:
     - name: Checkout code
-      uses: actions/checkout@v2
+      uses: actions/checkout@v3
 
     - name: Setup .NET
-      uses: actions/setup-dotnet@v2
+      uses: actions/setup-dotnet@v3
       with:
         dotnet-version: '8.0.x'
 
-    - name: Install .NET Framework 4.8 Developer Pack
-      run: |
-        choco install netfx-4.8-devpack
-        choco install visualstudio2019buildtools --package-parameters "--add Microsoft.VisualStudio.Workload.ManagedDesktopBuildTools --includeRecommended --includeOptional --quiet --wait"
-
     - name: Install dependencies
-      run: dotnet restore
+      run: dotnet restore test/EscPosCommandTests/EscPosCommandTests.csproj
 
     - name: Build
-      run: dotnet build --configuration Release --no-restore
+      run: dotnet build test/EscPosCommandTests/EscPosCommandTests.csproj --configuration Release --no-restore
 
     - name: Run tests
-      run: dotnet test --no-restore --verbosity normal
+      run: dotnet test test/EscPosCommandTests/EscPosCommandTests.csproj --no-restore --verbosity normal
