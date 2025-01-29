@@ -53,8 +53,13 @@ jobs:
     - name: Pack
       run: dotnet pack src/EscPosCommand/EscPosCommand.csproj --configuration Release --no-restore --output ./nupkg
       
+    - name: Find .nupkg file
+      id: nupkg-file
+      run: echo "nupkg_file=$(find ${{ github.workspace }}/nupkg -name '*.nupkg')" >> $GITHUB_ENV
+
     - name: Push to NuGet
       env:
         NUGET_API_KEY: ${{ secrets.NUGET_API_KEY }}
+        NUPKG_FILE: ${{ env.nupkg_file }}
       run: |
-        dotnet nuget push ${{ github.workspace }}/nupkg/*.nupkg --api-key $NUGET_API_KEY --source https://api.nuget.org/v3/index.json --skip-duplicate
+        dotnet nuget push $NUPKG_FILE --api-key $NUGET_API_KEY --source https://api.nuget.org/v3/index.json --skip-duplicate
