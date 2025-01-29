@@ -1,4 +1,4 @@
-name: .NET
+name: .NET CI/CD
 
 on:
   push:
@@ -9,7 +9,7 @@ on:
       - main
 
 jobs:
-  build:
+  build-and-test:
     runs-on: windows-latest
 
     steps:
@@ -29,3 +29,31 @@ jobs:
 
     - name: Run tests
       run: dotnet test test/EscPosCommandTests/EscPosCommandTests.csproj --no-restore --verbosity normal
+
+  release:
+    needs: build-and-test
+    runs-on: windows-latest
+    if: github.ref == 'refs/heads/main'
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v3
+      with:
+        dotnet-version: '8.0.x'
+
+    - name: Install dependencies
+      run: dotnet restore src/EscPosCommand/EscPosCommand.csproj
+
+    - name: Build
+      run: dotnet build src/EscPosCommand/EscPosCommand.csproj --configuration Release --no-restore
+
+    - name: Pack
+      run: dotnet pack src/EscPosCommand/EscPosCommand.csproj --configuration Release --no-restore --output ./nupkg
+      
+    - name: Push to NuGet
+      env:
+        NUGET_API_KEY: ${{ secrets.NUGET_API_KEY }}
+      run: dotnet nuget push ./nupkg/*.nupkg --api-key $NUGET_API_KEY --source https://api.nuget.org/v3/index.json --skip-duplicate
