@@ -55,7 +55,7 @@ jobs:
       
     - name: Find .nupkg file
       id: nupkg-file
-      run: echo "nupkg_file=$(find ${{ github.workspace }}/nupkg -name '*.nupkg')" >> $GITHUB_ENV
+      run: echo "nupkg_file=$(find ${{ github.workspace }}/nupkg/ -name '*.nupkg')" >> $GITHUB_ENV
     
     - name: Push to NuGet
       env:
