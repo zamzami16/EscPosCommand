@@ -32,15 +32,15 @@ jobs:
 
   release:
     needs: build-and-test
-    runs-on: windows-latest
+    runs-on: ubuntu-latest
     if: github.ref == 'refs/heads/main'
 
     steps:
     - name: Checkout code
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
 
     - name: Setup .NET
-      uses: actions/setup-dotnet@v3
+      uses: actions/setup-dotnet@v4
       with:
         dotnet-version: '8.0.x'
 
@@ -51,15 +51,11 @@ jobs:
       run: dotnet build src/EscPosCommand/EscPosCommand.csproj --configuration Release --no-restore
 
     - name: Pack
-      run: dotnet pack src/EscPosCommand/EscPosCommand.csproj --configuration Release --no-restore --output ./nupkg
-      
-    - name: Find .nupkg file
-      id: nupkg-file
-      run: echo "nupkg_file=$(find ${{ github.workspace }}/nupkg -name '*.nupkg')" >> $GITHUB_ENV
-    
+      run: dotnet pack src/EscPosCommand/EscPosCommand.csproj --configuration Release --no-restore --property:PackageoutputPath="$PWD/nupkg"
+
     - name: Push to NuGet
       env:
         NUGET_API_KEY: ${{ secrets.NUGET_API_KEY }}
-        NUPKG_FILE: ${{ env.nupkg_file }}
-      run: |
-        dotnet nuget push $NUPKG_FILE --api-key $NUGET_API_KEY --source https://api.nuget.org/v3/index.json --skip-duplicate
+      run: dotnet nuget push "*.nupkg" --api-key $NUGET_API_KEY --source https://api.nuget.org/v3/index.json --skip-duplicate
+      working-directory : nupkg
+        
