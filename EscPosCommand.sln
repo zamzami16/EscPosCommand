@@ -9,6 +9,24 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EscPosCommandDemo", "src\Es
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{ECE326BA-C88F-41A1-AF00-7D3B2E8C5C93}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{798E1A68-44C3-42C0-A90B-4E8357FA241E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EscPosCommandTests", "test\EscPosCommandTests\EscPosCommandTests.csproj", "{3845481B-8A70-4396-A3CB-F978F1F9E024}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{4DF4C2AF-64AE-4551-BABA-7A67D05287E3}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+		LICENSE.txt = LICENSE.txt
+		README.md = README.md
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".githubs", ".githubs", "{D55C7D5C-9D35-48E4-A4D6-685BB06B784F}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "workflows", "workflows", "{4B6D7281-3821-4AE1-8223-BAEA4F0815A5}"
+	ProjectSection(SolutionItems) = preProject
+		.github\workflows\test.yml = .github\workflows\test.yml
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -23,6 +41,10 @@ Global
 		{BEEDA78C-90EC-4A54-B03C-5423F17314A3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BEEDA78C-90EC-4A54-B03C-5423F17314A3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BEEDA78C-90EC-4A54-B03C-5423F17314A3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3845481B-8A70-4396-A3CB-F978F1F9E024}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3845481B-8A70-4396-A3CB-F978F1F9E024}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3845481B-8A70-4396-A3CB-F978F1F9E024}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3845481B-8A70-4396-A3CB-F978F1F9E024}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -30,5 +52,8 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{E22F79A6-CE6C-4020-B972-6E06761E9AB5} = {ECE326BA-C88F-41A1-AF00-7D3B2E8C5C93}
 		{BEEDA78C-90EC-4A54-B03C-5423F17314A3} = {ECE326BA-C88F-41A1-AF00-7D3B2E8C5C93}
+		{3845481B-8A70-4396-A3CB-F978F1F9E024} = {798E1A68-44C3-42C0-A90B-4E8357FA241E}
+		{D55C7D5C-9D35-48E4-A4D6-685BB06B784F} = {4DF4C2AF-64AE-4551-BABA-7A67D05287E3}
+		{4B6D7281-3821-4AE1-8223-BAEA4F0815A5} = {D55C7D5C-9D35-48E4-A4D6-685BB06B784F}
 	EndGlobalSection
 EndGlobal

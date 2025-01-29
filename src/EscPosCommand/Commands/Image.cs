@@ -7,7 +7,7 @@ namespace EscPosCommand.Commands;
 
 public class Image : IImage
 {
-    private static BitmapData GetBitmapData(Bitmap bmp, bool isScale)
+    public static BitmapData GetBitmapData(Bitmap bmp, bool isScale)
     {
         var threshold = 127;
         var index = 0;

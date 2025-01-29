@@ -15,11 +15,6 @@ internal static class PrinterExtensions
         return (byte)Convert.ToInt16(c);
     }
 
-    public static byte ToByte(this short c)
-    {
-        return (byte)c;
-    }
-
     public static byte[] AddBytes(this byte[] bytes, byte[] addBytes)
     {
         if (addBytes == null || addBytes.Length == 0)
