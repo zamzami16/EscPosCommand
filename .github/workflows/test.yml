@@ -10,7 +10,7 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
 
     steps:
     - name: Checkout code
@@ -20,6 +20,11 @@ jobs:
       uses: actions/setup-dotnet@v2
       with:
         dotnet-version: '8.0.x'
+
+    - name: Install .NET Framework 4.8 Developer Pack
+      run: |
+        choco install netfx-4.8-devpack
+        choco install visualstudio2019buildtools --package-parameters "--add Microsoft.VisualStudio.Workload.ManagedDesktopBuildTools --includeRecommended --includeOptional --quiet --wait"
 
     - name: Install dependencies
       run: dotnet restore
