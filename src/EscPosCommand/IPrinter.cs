@@ -42,4 +42,6 @@ public interface IPrinter
     void Ean13(string code, Positions positions);
     void InitializePrint();
     void AppendInitializePrint();
+    void DoubleStrike(string value);
+    void DoubleStrike(PrinterModeState state);
 }

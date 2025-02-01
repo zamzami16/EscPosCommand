@@ -1,8 +1,9 @@
-using EscPosCommand.Commands;
 using EscPosCommand.Enums;
 using System.Text;
 
-namespace EscPosCommand.Tests.Commands;
+#nullable disable
+
+namespace EscPosCommand.Commands.Tests;
 
 [TestFixture]
 public class FontModeTests
@@ -208,10 +209,34 @@ public class FontModeTests
     public void Font_StateOther_ReturnsCorrectByteArray()
     {
         // Arrange
-        byte[] expected = new byte[] { 27, 77, 1 };
+        byte[] expected = [27, 77, 1];
 
         // Act
         byte[] result = _fontMode.Font(Fonts.FontB);
+
+        // Assert
+        Assert.That(result, Is.EqualTo(expected));
+    }
+
+    [Test]
+    [TestCase(PrinterModeState.Off)]
+    [TestCase(PrinterModeState.On)]
+    public void DoubleStrike_ReturnsCorrectBytes(PrinterModeState state)
+    {
+        byte[] expected = [27, (byte)'G', (byte)(int)state];
+        var result = _fontMode.DoubleStrike(state);
+        Assert.That(result, Is.EqualTo(expected));
+    }
+
+    [Test]
+    public void DoubleStrike_WithValue_ReturnsCorrectByteArray()
+    {
+        // Arrange
+        string value = "Test";
+        byte[] expected = [27, (byte)'G', 1, (byte)'T', (byte)'e', (byte)'s', (byte)'t', 27, (byte)'G', 0, 10];
+
+        // Act
+        byte[] result = _fontMode.DoubleStrike(value);
 
         // Assert
         Assert.That(result, Is.EqualTo(expected));

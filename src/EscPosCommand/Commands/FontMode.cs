@@ -80,5 +80,18 @@ public class FontMode : IFontMode
 
         return [27, 'M'.ToByte(), (byte)state];
     }
+
+    public byte[] DoubleStrike(PrinterModeState printerModeState)
+    {
+        return [27, 'G'.ToByte(), (byte)printerModeState];
+    }
+
+    public byte[] DoubleStrike(string value)
+    {
+        return DoubleStrike(PrinterModeState.On)
+            .AddBytes(value)
+            .AddBytes(DoubleStrike(PrinterModeState.Off))
+            .AddLF();
+    }
 }
 
