@@ -23,5 +23,9 @@ internal interface IFontMode
     byte[] Font(string value, Fonts state);
 
     byte[] Font(Fonts state);
+
+    byte[] DoubleStrike(PrinterModeState printerModeState);
+
+    byte[] DoubleStrike(string value);
 }
 

@@ -294,4 +294,14 @@ public class Printer(string printerName, string codepage = "IBM860") : IPrinter
     {
         Append(_command.InitializePrint.Initialize());
     }
+
+    public void DoubleStrike(string value)
+    {
+        Append(_command.FontMode.DoubleStrike(value));
+    }
+
+    public void DoubleStrike(PrinterModeState state)
+    {
+        Append(_command.FontMode.DoubleStrike(state));
+    }
 }
